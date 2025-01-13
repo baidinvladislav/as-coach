@@ -25,8 +25,8 @@ import { storage } from '@utils';
 
 import { UserType } from '~types';
 
-import ProductSelectionScreen from '../screens/nutrition/product-details-screen';
-import ProductDetailsScreen from '../screens/nutrition/product-selection-screen';
+import ProductSelectionScreen from '../screens/nutrition/product-selection-screen';
+import ProductDetailsScreen from '../screens/nutrition/product-details-screen';
 import MyTabs from './bottom-tab';
 
 export const Stack = createStackNavigator();

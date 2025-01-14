@@ -85,16 +85,21 @@ const MainScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Image
-            source={require('../../assets/images/calendar.png')}
-            style={{ height: 30, width: 30 }}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>
-          {data?.actual_nutrition?.date || 'No date available'}
-        </Text>
-        <View style={styles.profilePic} />
+        {/*remove calendar */}
+        {/*<TouchableOpacity>*/}
+        {/*  <Image*/}
+        {/*    source={require('../../assets/images/calendar.png')}*/}
+        {/*    style={{ height: 30, width: 30 }}*/}
+        {/*  />*/}
+        {/*</TouchableOpacity>*/}
+
+        {/*remove date */}
+        {/*<Text style={styles.headerText}>*/}
+        {/*  {data?.actual_nutrition?.date || 'No date available'}*/}
+        {/*</Text>*/}
+
+        {/*remove profile pic */}
+        {/*<View style={styles.profilePic} />*/}
       </View>
 
       <View style={styles.statsContainer}>

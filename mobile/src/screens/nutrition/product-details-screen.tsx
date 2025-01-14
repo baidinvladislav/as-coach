@@ -28,19 +28,19 @@ const ProductDetailsScreen: React.FC = ({ route }) => {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.foodName}>{product.name}</Text>
+      <Text style={styles.foodName}>{product['name']}</Text>
 
       <TextInput
         style={styles.input}
         placeholder="Unit"
         placeholderTextColor="#666"
-        value={`${product.amount} ${product.type}`}
+        value={`${product['amount']} ${product['type']}`}
       />
       <TextInput
         style={styles.input}
         placeholder="Weight / Volume"
         placeholderTextColor="#666"
-        value={`${product.amount}`}
+        value={product['amount']}
       />
 
       <Text style={styles.nutritionHeader}>Nutrition Facts</Text>
@@ -48,19 +48,19 @@ const ProductDetailsScreen: React.FC = ({ route }) => {
       <View style={styles.nutritionFacts}>
         <View style={styles.factRow}>
           <Text style={styles.factText}>🍽️ Calories:</Text>
-          <Text style={styles.factValue}>{product.calories} cal</Text>
+          <Text style={styles.factValue}>{`${product['calories']} cal`}</Text>
         </View>
         <View style={styles.factRow}>
           <Text style={styles.factText}>🥚 Proteins:</Text>
-          <Text style={styles.factValue}>{product.proteins} g</Text>
+          <Text style={styles.factValue}>{`${product['proteins']} g`}</Text>
         </View>
         <View style={styles.factRow}>
           <Text style={styles.factText}>🌰 Fats:</Text>
-          <Text style={styles.factValue}>{product.fats} g</Text>
+          <Text style={styles.factValue}>{`${product['fats']} g`}</Text>
         </View>
         <View style={styles.factRow}>
           <Text style={styles.factText}>🌾 Carbs:</Text>
-          <Text style={styles.factValue}>{product.carbs} g</Text>
+          <Text style={styles.factValue}>{`${product['carbs']} g`}</Text>
         </View>
       </View>
 

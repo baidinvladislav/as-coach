@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import { BackgroundImage, BicepsImage, DefaultAvatarImage } from '@assets';
-import { LkClients, Plans } from '@components';
+import { LkClients } from '@components';
 import { BASE_URL, TOP_PADDING } from '@constants';
 import { useStore } from '@hooks';
 import { t } from '@i18n';
@@ -19,6 +19,8 @@ import { Text } from '@ui';
 import { windowHeight, windowWidth } from '@utils';
 
 import { FontSize, FontWeight, UserType } from '~types';
+
+import MainScreen from '../nutrition/main-screen';
 
 export const LkScreen = observer(() => {
   const { user, customer } = useStore();
@@ -90,17 +92,7 @@ export const LkScreen = observer(() => {
         </TouchableOpacity>
       </Flex>
 
-      {isCoach ? (
-        <LkClients />
-      ) : (
-        <Plans
-          data={data}
-          getCustomerInfo={getCustomerInfo}
-          title={t('lk.herePlans')}
-          description={t('lk.hereAddPlans')}
-          withAddButton={false}
-        />
-      )}
+      {isCoach ? <LkClients /> : <MainScreen />}
     </View>
   );
 });

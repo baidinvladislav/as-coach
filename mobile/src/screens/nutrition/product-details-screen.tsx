@@ -84,7 +84,6 @@ const ProductDetailsScreen: React.FC = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
   },
   closeIconContainer: {
     marginVertical: 15,

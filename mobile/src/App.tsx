@@ -8,7 +8,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import moment from 'moment';
-import 'moment/locale/ru';
 import { Edge, SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 
@@ -27,9 +26,11 @@ import {
   requestUserPermission,
 } from './push/notificationServices';
 
-moment.locale('ru');
-moment.updateLocale('ru', {
-  monthsShort: monthNamesShort,
+const locale = 'en';
+
+moment.locale(locale);
+moment.updateLocale(locale, {
+  monthsShort: monthNamesShort[locale],
 });
 
 const App = () => {

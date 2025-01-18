@@ -24,15 +24,17 @@ import { windowWidth } from '@utils';
 import { Text } from '../text';
 import CustomDay from './day';
 
-LocaleConfig.locales['ru'] = {
-  monthNames,
-  monthNamesShort,
-  dayNames,
-  dayNamesShort,
-  today,
+const locale = 'en';
+
+LocaleConfig.locales[locale] = {
+  monthNames: monthNames[locale],
+  monthNamesShort: monthNamesShort[locale],
+  dayNames: dayNames[locale],
+  dayNamesShort: dayNamesShort[locale],
+  today: today[locale],
 };
 
-LocaleConfig.defaultLocale = 'ru';
+LocaleConfig.defaultLocale = 'en';
 
 const INITIAL_DATE = new Date().toString();
 

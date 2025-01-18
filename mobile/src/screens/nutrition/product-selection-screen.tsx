@@ -10,11 +10,11 @@ import {
 } from 'react-native';
 
 import {
+  addProductToDiet,
   getDietDetails,
   getProductDetails,
   getProductHistory,
   searchProduct,
-  addProductToDiet,
 } from '@api';
 import { useNavigation } from '@navigation';
 import { Loader } from '@ui';
@@ -265,7 +265,7 @@ const FoodSelectionScreen = ({ route }) => {
           onPress={() => navigation.goBack()}
           style={styles.cancelButton}
         >
-          <Text style={styles.buttonText}>Cancel</Text>
+          <Text style={styles.cancelButtonText}>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={selectedIndices.length === 0}
@@ -274,7 +274,9 @@ const FoodSelectionScreen = ({ route }) => {
           }}
           style={[styles.saveButton]}
         >
-          <Text style={styles.buttonText}>Save ({selectedIndices.length})</Text>
+          <Text style={styles.saveButtonText}>
+            Save ({selectedIndices.length})
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -371,14 +373,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
-    backgroundColor: '#222',
     width: '100%',
     paddingVertical: 10,
     position: 'absolute',
     bottom: 0,
     alignSelf: 'center',
     justifyContent: 'center',
-    padding: 20,
   },
   cancelButton: {
     backgroundColor: '#555',
@@ -387,6 +387,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
   },
+  cancelButtonText: {
+    color: '#B8FF5F',
+    textAlign: 'center',
+  },
   saveButton: {
     backgroundColor: '#B8FF5F',
     padding: 15,
@@ -394,7 +398,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
   },
-  buttonText: {
+  saveButtonText: {
     color: '#192026',
     textAlign: 'center',
   },

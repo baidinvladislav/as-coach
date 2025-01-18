@@ -294,7 +294,7 @@ async def get_all_training_plans(
     status_code=status.HTTP_200_OK)
 async def get_training_plan(
     training_plan_id: UUID,
-    customer_id: str,
+    customer_id: str,  # TODO: make uuid it raises 500 now if not uuid
     user_service: CoachService = Depends(provide_user_service),
     training_plan_service: TrainingPlanService = Depends(provide_training_plan_service),
     customer_service: CustomerService = Depends(provide_customer_service),

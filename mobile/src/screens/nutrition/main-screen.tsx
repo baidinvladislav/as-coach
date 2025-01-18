@@ -250,7 +250,7 @@ const MainScreen: React.FC = () => {
                   </View>
                   <Text style={styles.caloriesText}>
                     🍽️ Calories:{' '}
-                    {data?.actual_nutrition?.[meal]?.calories_total || 0}
+                    {data?.actual_nutrition?.[meal]?.total_calories || 0}
                   </Text>
                 </View>
 

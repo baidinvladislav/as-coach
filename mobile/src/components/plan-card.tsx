@@ -71,21 +71,21 @@ export const PlanCard = ({ plan, onPress, withMenu = true }: TProps) => (
       <NumberContainer>
         <NumberText color={colors.white} fontSize={FontSize.S10}>
           {t('detailCustomer.proteins', {
-            number: renderNumber(plan.proteins, ' гр / '),
+            number: renderNumber(plan.proteins, ' gr / '),
           })}
         </NumberText>
       </NumberContainer>
       <NumberContainer>
         <NumberText color={colors.white} fontSize={FontSize.S10}>
           {t('detailCustomer.carbs', {
-            number: renderNumber(plan.carbs, ' гр / '),
+            number: renderNumber(plan.carbs, ' gr / '),
           })}
         </NumberText>
       </NumberContainer>
       <NumberContainer isLast={true}>
         <NumberText color={colors.white} fontSize={FontSize.S10}>
           {t('detailCustomer.fats', {
-            number: renderNumber(plan.fats, ' гр / '),
+            number: renderNumber(plan.fats, ' gr / '),
           })}
         </NumberText>
       </NumberContainer>

@@ -48,8 +48,9 @@ export const en = {
     placeholder1: 'Proteins',
     placeholder2: 'Fats',
     placeholder3: 'Carbs',
-    description1: 'Rest between sets, seconds',
-    description2: 'Rest between exercises, seconds',
+    restTime: 'Rest time',
+    description1: 'between sets',
+    description2: 'between exercises',
     checkboxDescription: 'Different on training and rest days',
     enterText: 'Enter text',
     days1: 'Training Days',
@@ -73,13 +74,14 @@ export const en = {
     nav4: 'Log Out',
     profileDeletionPrefix: 'If you want to delete your account, click',
     profileDeletionClickable: 'here',
-    confirmDeleteDialogQuestion: 'Are you sure you want to delete your account?',
-    confirmDeleteDialogWarning: 
+    confirmDeleteDialogQuestion:
+      'Are you sure you want to delete your account?',
+    confirmDeleteDialogWarning:
       'All your data will be deleted and cannot be recovered',
     confirmDeleteDialogConfirm: 'Delete',
     confirmDeleteDialogCancel: 'Cancel',
     maxFileSizeAlertTitle: 'File Size Exceeded',
-    maxFileSizeAlertDescription: 
+    maxFileSizeAlertDescription:
       'This file is too large, the maximum file size is 10 MB',
   },
   edit: {

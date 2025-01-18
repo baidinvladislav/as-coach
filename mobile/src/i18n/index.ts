@@ -2,14 +2,14 @@ import { createIntl, createIntlCache } from 'react-intl';
 
 import { flattenMessages } from '@utils';
 
-import { ru } from './locales/ru';
+import { en } from './locales/en';
 
 const cache = createIntlCache();
 
-const locale = 'ru';
+const locale = 'en';
 
 const i18nMsg: { [key: string]: Record<string, string> } = {
-  ru: flattenMessages(ru),
+  en: flattenMessages(en),
 };
 
 export const intl = createIntl(

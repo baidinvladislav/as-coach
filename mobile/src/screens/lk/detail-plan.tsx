@@ -44,11 +44,20 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
             {moment(data.end_date).format('D MMM').slice(0, -1)}
           </Text>
           <RowBorder
-            title="Питание"
+            title={t('createPlan.title1')}
             cells={[
-              { title: 'Белки', value: renderNumber(data.proteins, ' / ') },
-              { title: 'Углеводы', value: renderNumber(data.carbs, ' / ') },
-              { title: 'Жиры', value: renderNumber(data.fats, ' / ') },
+              {
+                title: t('createPlan.placeholder1'),
+                value: renderNumber(data.proteins, ' / '),
+              },
+              {
+                title: t('createPlan.placeholder3'),
+                value: renderNumber(data.carbs, ' / '),
+              },
+              {
+                title: t('createPlan.placeholder2'),
+                value: renderNumber(data.fats, ' / '),
+              },
             ]}
             description={
               isDifference ? t('createPlan.differenceTime') : undefined
@@ -60,16 +69,19 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
             fontSize={FontSize.S20}
             weight={FontWeight.Bold}
           >
-            Тренировки
+            {t('createPlan.title2')}
           </Text>
           <ExercisesList exercises={data.trainings} />
           <RowBorder
-            title="Время отдыха"
+            title={t('createPlan.restTime')}
             cells={[
-              { title: 'Между подходами', value: `${data.set_rest} сек` },
               {
-                title: 'Между упражнениями',
-                value: `${data.exercise_rest} сек`,
+                title: t('createPlan.description1'),
+                value: `${data.set_rest} sec`,
+              },
+              {
+                title: t('createPlan.description2'),
+                value: `${data.exercise_rest} sec`,
               },
             ]}
           />
@@ -79,7 +91,7 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
             fontSize={FontSize.S20}
             weight={FontWeight.Bold}
           >
-            Заметки от тренера
+            {t('createPlan.title3')}
           </Text>
           <Text
             color={colors.white}

@@ -192,7 +192,7 @@ export const getWeek = (date: Date) => {
 export const renderNumber = (number: string, join: string) => {
   const arr = number.split('/');
 
-  return arr.join(join) + ' гр';
+  return arr.join(join) + ' gr';
 };
 
 const getDifferenceInDays = (dateEnd: string): number => {

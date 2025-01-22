@@ -1,9 +1,13 @@
+import logging
 from uuid import UUID
 from datetime import date
 
 from pydantic import BaseModel
 
 from src import Diet, DietDays
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 class DietDtoSchema(BaseModel):
@@ -45,7 +49,7 @@ class DailyDietDtoSchema(BaseModel):
     """
     date: date
 
-    template_diet_id: UUID
+    template_diet_id: UUID | None
     total_calories: int
     total_proteins: int
     total_fats: int
@@ -120,17 +124,26 @@ class DailyDietDtoSchema(BaseModel):
     def from_recommended_diet(cls, template_diet: Diet | None, specific_day: date) -> "DailyDietDtoSchema":
         if template_diet is None:
             # the customer doesn't have any diet from coach for the date
+            logger.info(
+                f"customer.doesn't.have.any.diet.for.date, details=template_diet: {template_diet}, specific_day: {date}"
+            )
             return cls.create_empty_diet(None, specific_day)
 
         customer_fact_days = template_diet.diet_days
         if not customer_fact_days:
             # the customer hasn't logged any days from the diet
+            logger.info(
+                f"customer.hasn't.logged.any.diet.days, details=template_diet: {template_diet}, specific_day: {date}"
+            )
             return cls.create_empty_diet(template_diet, specific_day)
 
         specific_day_fact = next((day for day in customer_fact_days if day.date == specific_day), None)
 
         if specific_day_fact is None:
             # the customer hasn't logged the requested day
+            logger.info(
+                f"customer.hasn't.logged.requested.day, details=template_diet: {template_diet}, specific_day: {date}"
+            )
             return cls.create_empty_diet(template_diet, specific_day)
 
         meals = [

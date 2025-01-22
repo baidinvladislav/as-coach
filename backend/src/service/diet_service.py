@@ -1,3 +1,4 @@
+import logging
 from datetime import date
 from uuid import UUID
 
@@ -9,6 +10,9 @@ from src.repository.diet_repository import DietRepository
 from src.schemas.diet_dto import DailyDietDtoSchema
 from src.service.calories_calculator_service import CaloriesCalculatorService
 from src.service.product_service import ProductService
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 class DietService:
@@ -101,6 +105,8 @@ class DietService:
     async def get_daily_customer_diet(
         self, uow: AsyncSession, customer_id: UUID, specific_day: date,
     ) -> DailyDietDtoSchema | None:
+        logger.info(f"getting.customer.diet, details=customer_id: {customer_id}, specific_day: {date}")
+
         diet = await self.diet_repository.get_daily_diet_by_training_plan_date_range(
             uow=uow,
             customer_id=customer_id,
@@ -108,6 +114,7 @@ class DietService:
         )
 
         if diet.diet_day_id is None:
+            logger.info(f"creating.customer.daily.diet, details=customer_id: {customer_id}, specific_day: {date}")
             diet = await self.diet_repository.create_daily_diet(
                 uow=uow,
                 template_diet_id=diet.template_diet_id,

@@ -119,7 +119,7 @@ export const ProfileScreen = observer(() => {
     <View style={{ paddingTop: TOP_PADDING }}>
       <BackButton
         style={{ width: normHor(20) }}
-        onPress={() => navigate(Screens.LkScreen)}
+        onPress={() => navigate('plan')}
       >
         <ArrowLeftIcon />
       </BackButton>

@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styled from 'styled-components';
 
 import { BackgroundImage, BicepsImage, DefaultAvatarImage } from '@assets';
-import { LkClients } from '@components';
+import { LkClients, Plans } from '@components';
 import { BASE_URL, TOP_PADDING } from '@constants';
 import { useStore } from '@hooks';
 import { t } from '@i18n';
@@ -92,7 +92,18 @@ export const LkScreen = observer(() => {
         </TouchableOpacity>
       </Flex>
 
-      {isCoach ? <LkClients /> : <MainScreen />}
+      {/* {isCoach ? <LkClients /> : <MainScreen />} */}
+      {isCoach ? (
+        <MainScreen />
+      ) : (
+        <Plans
+          data={data}
+          getCustomerInfo={getCustomerInfo}
+          title={t('lk.herePlans')}
+          description={t('lk.hereAddPlans')}
+          withAddButton={false}
+        />
+      )}
     </View>
   );
 });

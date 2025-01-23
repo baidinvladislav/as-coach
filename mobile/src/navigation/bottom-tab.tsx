@@ -21,7 +21,7 @@ const MyTabs = () => (
           iconName = focused
             ? require('../assets/images/Nactive.png')
             : require('../assets/images/NunActive.png');
-        } else if (route.name === Screens.LkScreen) {
+        } else if (route.name === "plan") {
           iconName = focused
             ? require('../assets/images/Pactive.png')
             : require('../assets/images/PunActive.png');
@@ -46,7 +46,7 @@ const MyTabs = () => (
       options={{ tabBarLabel: 'Nutrition' }}
     />
     <Tab.Screen
-      name={Screens.LkScreen}
+      name={"plan"}
       component={LkScreen}
       options={{ tabBarLabel: 'Plan' }}
     />

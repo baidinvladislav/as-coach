@@ -51,7 +51,7 @@ export const StackNavigator = observer(() => {
 
   return (
     <Stack.Navigator
-      initialRouteName={isGuest ? Screens.WelcomeScreen : Screens.LkScreen}
+      initialRouteName={isGuest ? Screens.WelcomeScreen : Screens.BottomTab}
       screenOptions={{
         headerShown: false,
         animationEnabled: false,
@@ -81,7 +81,7 @@ export const StackNavigator = observer(() => {
             name={Screens.FoodSelectionScreen}
             component={ProductSelectionScreen}
           />
-          <Stack.Screen name={Screens.LkScreen} component={LkScreen} />
+          {/* <Stack.Screen name={Screens.LkScreen} component={LkScreen} /> */}
           <Stack.Screen name={Screens.DetailClient} component={DetailClient} />
           <Stack.Screen
             options={{

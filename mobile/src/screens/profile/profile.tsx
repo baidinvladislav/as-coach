@@ -73,7 +73,7 @@ const ClickableText = styled(Text)`
 export const ProfileScreen = observer(() => {
   const { user, customer } = useStore();
 
-  const { navigate } = useNavigation();
+  const { navigate,goBack } = useNavigation();
 
   const handleGoEdit = () => {
     navigate(Screens.ProfileEditScreen);
@@ -119,7 +119,7 @@ export const ProfileScreen = observer(() => {
     <View style={{ paddingTop: TOP_PADDING }}>
       <BackButton
         style={{ width: normHor(20) }}
-        onPress={() => navigate('plan')}
+        onPress={() => goBack()}
       >
         <ArrowLeftIcon />
       </BackButton>

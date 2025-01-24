@@ -20,8 +20,6 @@ import { windowHeight, windowWidth } from '@utils';
 
 import { FontSize, FontWeight, UserType } from '~types';
 
-import MainScreen from '../nutrition/main-screen';
-
 export const LkScreen = observer(() => {
   const { user, customer } = useStore();
   const { top } = useSafeAreaInsets();
@@ -56,17 +54,10 @@ export const LkScreen = observer(() => {
     <View
       style={{
         flex: 1,
-        paddingHorizontal: normHor(16),
+
         paddingTop: TOP_PADDING + top,
       }}
     >
-      <BackgroundColor />
-      <Background
-        blurRadius={10}
-        source={BackgroundImage}
-        style={{ opacity: 0.3 }}
-      />
-
       <DateText
         weight={FontWeight.Bold}
         color={colors.black4}
@@ -94,7 +85,7 @@ export const LkScreen = observer(() => {
 
       {/* {isCoach ? <LkClients /> : <MainScreen />} */}
       {isCoach ? (
-        <MainScreen />
+        <LkClients />
       ) : (
         <Plans
           data={data}

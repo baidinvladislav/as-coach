@@ -38,7 +38,7 @@ export const LoginScreen = observer(() => {
         if (values.password && values.password.length === OTP_LENGTH) {
           navigate(Screens.NewChangePasswordScreen);
         } else {
-          navigate(Screens.LkScreen);
+          navigate(Screens.User);
         }
       })
       .catch((e: AxiosError<{ detail: string }>) => {

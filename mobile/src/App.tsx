@@ -20,7 +20,11 @@ import {
 } from '@react-navigation/native';
 import { colors } from '@theme';
 import { Layout } from '@ui';
-import { notificationListener, requestUserPermission } from './push/notificationServices';
+
+import {
+  notificationListener,
+  requestUserPermission,
+} from './push/notificationServices';
 
 const locale = 'en';
 

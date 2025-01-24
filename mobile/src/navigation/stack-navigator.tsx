@@ -25,6 +25,11 @@ import { storage } from '@utils';
 
 import { UserType } from '~types';
 
+import ProductSelectionScreen from '../screens/nutrition/product-selection-screen';
+import ProductDetailsScreen from '../screens/nutrition/product-details-screen';
+import MyTabs from './bottom-tab';
+import User from './User';
+
 export const Stack = createStackNavigator();
 
 export const StackNavigator = observer(() => {
@@ -47,7 +52,7 @@ export const StackNavigator = observer(() => {
 
   return (
     <Stack.Navigator
-      initialRouteName={isGuest ? Screens.WelcomeScreen : Screens.LkScreen}
+      initialRouteName={isGuest ? Screens.WelcomeScreen : Screens.User}
       screenOptions={{
         headerShown: false,
         animationEnabled: false,
@@ -68,14 +73,18 @@ export const StackNavigator = observer(() => {
         </Stack.Group>
       ) : (
         <Stack.Group>
-          <Stack.Screen name={Screens.LkScreen} component={LkScreen} />
+         <Stack.Screen name={Screens.User} component={User} />
+          <Stack.Screen name={Screens.BottomTab} component={MyTabs} />
           <Stack.Screen
-            options={{
-              animationEnabled: true,
-            }}
-            name={Screens.DetailClient}
-            component={DetailClient}
+            name={Screens.FoodDetailsScreen}
+            component={ProductDetailsScreen}
           />
+          <Stack.Screen
+            name={Screens.FoodSelectionScreen}
+            component={ProductSelectionScreen}
+          />
+          <Stack.Screen name={Screens.LkScreen} component={LkScreen} />
+          <Stack.Screen name={Screens.DetailClient} component={DetailClient} />
           <Stack.Screen
             options={{
               presentation: 'modal',

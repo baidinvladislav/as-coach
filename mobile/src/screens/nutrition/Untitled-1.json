@@ -1,0 +1,21 @@
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzgzMDM0MTEsInN1YiI6Iis3OTAzMTgwMDIyNyJ9.z4jFDYSDbBsBwZdJ2lTd5sXNTIxa_6PVWIXUyaOJ57Q",
+  "Content-Type": "application/json",
+  "common": { "Accept": "application/json, text/plain, */*" },
+  "delete": {},
+  "get": {},
+  "head": {},
+  "patch": { "Content-Type": "application/x-www-form-urlencoded" },
+  "post": { "Content-Type": "application/x-www-form-urlencoded" },
+  "put": { "Content-Type": "application/x-www-form-urlencoded" }
+},
+
+{"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzgzMDQwNDMsInN1YiI6Iis3OTg1NzkxNDY4OCJ9.M9ZQirXkU5rpPSAUp8oK30CP9AGsYhBr8ByEliMU2D0", 
+"Content-Type": "application/json",
+ "common": {"Accept": "application/json, text/plain, */*"}, 
+ "delete": {},
+  "get": {}, 
+  "head": {}, 
+  "patch": {"Content-Type": "application/x-www-form-urlencoded"},
+  "post": {"Content-Type": "application/x-www-form-urlencoded"}, 
+  "put": {"Content-Type": "application/x-www-form-urlencoded"}}

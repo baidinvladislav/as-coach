@@ -11,6 +11,7 @@ import MyTabs from './bottom-tab';
 const User = () => {
   const { user } = useStore();
   const isCoach = user.me.user_type == UserType.COACH;
+  console.log(isCoach);
 
   return <>{isCoach ? <LkScreen /> : <MyTabs />}</>;
 };

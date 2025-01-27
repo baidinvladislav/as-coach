@@ -47,22 +47,30 @@ const FoodSelectionScreen = ({ route }) => {
     setLoading(false);
   };
 
-  const handleSearch = async (text: string) => {
+  const handleTextChange = async (text: string) => {
     setSearchQuery(text);
     if (text === '') {
       setFilteredProducts(products);
-    } else {
-      const filtered = products.filter(item =>
-        item?.name?.toLowerCase().includes(text.toLowerCase()),
-      );
-      if (filtered.length <= 0) {
-        setLoading(true);
-        const liveProduct = await searchProduct(text);
-        setFilteredProducts(liveProduct);
-        setLoading(false);
-      } else {
-        setFilteredProducts(filtered);
-      }
+    } else if (
+      text.length > 0 &&
+      (text[text.length - 1] === ' ' || text !== text.trim())
+    ) {
+      handleSearch(text);
+    }
+  };
+
+  const handleSearch = async text => {
+    if (text.trim().length > 0) {
+      console.log('Api CAlled');
+      const liveProduct = await searchProduct(text.trim());
+      setFilteredProducts(liveProduct);
+    }
+  };
+
+  const handleKeyPress = ({ nativeEvent }: any) => {
+    if (nativeEvent.key === 'Enter') {
+      Keyboard.dismiss();
+      handleSearch(searchQuery);
     }
   };
 
@@ -131,7 +139,9 @@ const FoodSelectionScreen = ({ route }) => {
             placeholder="Search"
             placeholderTextColor="#666"
             value={searchQuery}
-            onChangeText={handleSearch}
+            onChangeText={handleTextChange}
+            onSubmitEditing={handleSearch}
+            onKeyPress={handleKeyPress}
             style={styles.textInput}
             onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)}

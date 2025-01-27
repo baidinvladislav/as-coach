@@ -54,10 +54,17 @@ export const LkScreen = observer(() => {
     <View
       style={{
         flex: 1,
-
+        paddingHorizontal: normHor(4),
         paddingTop: TOP_PADDING + top,
       }}
     >
+      <BackgroundColor />
+      <Background
+        blurRadius={10}
+        source={BackgroundImage}
+        style={{ opacity: 0.3 }}
+      />
+
       <DateText
         weight={FontWeight.Bold}
         color={colors.black4}
@@ -83,7 +90,6 @@ export const LkScreen = observer(() => {
         </TouchableOpacity>
       </Flex>
 
-      {/* {isCoach ? <LkClients /> : <MainScreen />} */}
       {isCoach ? (
         <LkClients />
       ) : (

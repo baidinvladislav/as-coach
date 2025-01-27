@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 import moment from 'moment';
+import styled from 'styled-components';
 
 import { getCustomerPlanDetail } from '@api';
+import { BackgroundImage } from '@assets';
 import { ExercisesList } from '@components';
 import { t } from '@i18n';
 import { RoutesProps, useNavigation } from '@navigation';
 import { colors, normVert } from '@theme';
 import { Loader, ModalLayout, RowBorder, Text, ViewWithButtons } from '@ui';
-import { renderNumber } from '@utils';
+import { renderNumber, windowHeight, windowWidth } from '@utils';
 
 import { FontSize, FontWeight, TPlanType } from '~types';
 
@@ -27,6 +29,12 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
 
   return (
     <ModalLayout>
+      <BackgroundColor />
+      <Background
+        blurRadius={10}
+        source={BackgroundImage}
+        style={{ opacity: 0.3 }}
+      />
       {data ? (
         <ViewWithButtons
           style={{ justifyContent: 'space-between' }}
@@ -124,3 +132,16 @@ const styles = StyleSheet.create({
     marginBottom: normVert(21),
   },
 });
+
+const Background = styled(Image)`
+  position: absolute;
+  width: ${windowWidth}px;
+  height: ${windowHeight}px;
+`;
+
+const BackgroundColor = styled(View)`
+  position: absolute;
+  width: ${windowWidth}px;
+  height: ${windowHeight}px;
+  background-color: ${colors.black};
+`;

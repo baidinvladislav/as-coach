@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   FlatList,
   Image,
+  Keyboard,
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
@@ -47,22 +49,42 @@ const FoodSelectionScreen = ({ route }) => {
     setLoading(false);
   };
 
-  const handleSearch = async (text: string) => {
+  const handleTextChange = async (text: string) => {
     setSearchQuery(text);
     if (text === '') {
       setFilteredProducts(products);
     } else {
-      const filtered = products.filter(item =>
-        item?.name?.toLowerCase().includes(text.toLowerCase()),
-      );
-      if (filtered.length <= 0) {
-        setLoading(true);
-        const liveProduct = await searchProduct(text);
-        setFilteredProducts(liveProduct);
-        setLoading(false);
-      } else {
-        setFilteredProducts(filtered);
+      // const filtered = products.filter(item =>
+      //   item?.name?.toLowerCase().includes(text.toLowerCase()),
+      // );
+
+      if (
+        text.length > 0 &&
+        (text[text.length - 1] === ' ' || text.trim() !== text.trim())
+      ) {
+        handleSearch(text);
       }
+      // } else {
+      //   setFilteredProducts(filtered);
+      // }
+    }
+  };
+
+  const handleSearch = async text => {
+    if (text.trim().length > 0) {
+      console.log('Api CAlled');
+      // setLoading(true);
+      const liveProduct = await searchProduct(text.trim());
+      setFilteredProducts(liveProduct);
+      // setLoading(false);
+    }
+  };
+
+  const handleKeyPress = ({ nativeEvent }: any) => {
+    if (nativeEvent.key === 'Enter') {
+      // Dismiss the keyboard and trigger the search
+      Keyboard.dismiss();
+      handleSearch(searchQuery);
     }
   };
 
@@ -117,7 +139,6 @@ const FoodSelectionScreen = ({ route }) => {
       setLoading(false);
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.searchWrapper}>
@@ -131,7 +152,9 @@ const FoodSelectionScreen = ({ route }) => {
             placeholder="Search"
             placeholderTextColor="#666"
             value={searchQuery}
-            onChangeText={handleSearch}
+            onChangeText={handleTextChange}
+            onSubmitEditing={handleSearch}
+            onKeyPress={handleKeyPress}
             style={styles.textInput}
             onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)}
@@ -244,17 +267,22 @@ const FoodSelectionScreen = ({ route }) => {
               >
                 But you can add it yourself
               </Text>
-              <Text style={{ color: '#B8FF5F', fontSize: 25, marginTop: '5%' }}>
-                {'+ '}
+              <Pressable onPress={() => console.log('This is in progress')}>
                 <Text
-                  style={{
-                    fontWeight: '700',
-                    fontSize: 18,
-                  }}
+                  style={{ color: '#B8FF5F', fontSize: 25, marginTop: '5%' }}
                 >
-                  "{`${searchQuery}`}"
+                  {' '}
+                  {'+ '}
+                  <Text
+                    style={{
+                      fontWeight: '700',
+                      fontSize: 18,
+                    }}
+                  >
+                    "{`${searchQuery}`}"
+                  </Text>
                 </Text>
-              </Text>
+              </Pressable>
             </View>
           </View>
         )

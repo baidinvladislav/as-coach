@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
   title: {
     textTransform: 'uppercase',
     marginBottom: normVert(40),
+    paddingTop:normVert(10)
   },
   contentTitle: { marginBottom: normVert(19) },
   list: {

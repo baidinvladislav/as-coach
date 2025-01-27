@@ -74,6 +74,13 @@ const FoodSelectionScreen = ({ route }) => {
     }
   };
 
+  const handleBlur = () => {
+    setInputFocused(false);
+    if (searchQuery.trim().length > 0) {
+      handleSearch(searchQuery);
+    }
+  };
+
   const handleSelectItem = index => {
     if (selectedIndices.includes(index)) {
       setSelectedIndices(selectedIndices.filter(i => i !== index));
@@ -136,15 +143,16 @@ const FoodSelectionScreen = ({ route }) => {
           />
           <TextInput
             ref={inputRef}
+            keyboardType="default"
             placeholder="Search"
             placeholderTextColor="#666"
             value={searchQuery}
             onChangeText={handleTextChange}
-            onSubmitEditing={handleSearch}
+            onSubmitEditing={() => handleSearch(searchQuery)}
             onKeyPress={handleKeyPress}
             style={styles.textInput}
             onFocus={() => setInputFocused(true)}
-            onBlur={() => setInputFocused(false)}
+            onBlur={() => handleBlur()}
           />
           {searchQuery ? (
             <TouchableOpacity

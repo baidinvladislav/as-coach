@@ -78,5 +78,6 @@ const BackgroundColor = styled(Reanimated.View)`
 `;
 
 const Container = styled(View)`
+padding-horizontal:${normHor(16)}px;
   flex: 1;
 `;

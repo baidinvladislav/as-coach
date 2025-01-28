@@ -40,6 +40,9 @@ export const ExercisesList = forwardRef((props: TProps, ref) => {
     setCards(new Array(props.exercises.length).fill(false));
     setCards(cards => cards.map((_, index) => index === key));
   };
+  // console.log(' props.exercises.length======', props.exercises.length);
+  // console.log(' exercises=====', JSON.stringify(props.exercises));
+
   return props.exercises.length ? (
     <View style={styles.list}>
       {props.exercises.map((exercises, key) => (

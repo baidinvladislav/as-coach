@@ -24,9 +24,9 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
   useEffect(() => {
     getCustomerPlanDetail(id, planId).then(({ data }) => setData(data));
   }, [id, planId]);
-
+  
   const isDifference = data?.proteins?.indexOf('/') !== -1;
-
+  // console.log('data.trainings......',data);
   return (
     <ModalLayout>
       <BackgroundColor />
@@ -39,7 +39,7 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
         <ViewWithButtons
           style={{ justifyContent: 'space-between' }}
           onCancel={goBack}
-          cancelText={t('buttons.ok')}
+          cancelText={t('buttons.fine')}
           isScroll={true}
         >
           <Text
@@ -80,7 +80,7 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
             {t('createPlan.title2')}
           </Text>
           <ExercisesList exercises={data.trainings} />
-          <RowBorder
+          {/* <RowBorder
             title={t('createPlan.restTime')}
             cells={[
               {
@@ -92,14 +92,14 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
                 value: `${data.exercise_rest} sec`,
               },
             ]}
-          />
+          /> */}
           <Text
             color={colors.white}
             style={styles.contentTitle}
             fontSize={FontSize.S20}
             weight={FontWeight.Bold}
           >
-            {t('createPlan.title3')}
+            {t('createPlan.title4')}
           </Text>
           <Text
             color={colors.white}
@@ -146,3 +146,5 @@ const BackgroundColor = styled(View)`
   height: ${windowHeight}px;
   background-color: ${colors.black};
 `;
+
+

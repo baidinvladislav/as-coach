@@ -146,7 +146,7 @@ export const ExercisesCard = ({
                 color={colors.black4}
                 fontSize={FontSize.S12}
               >
-                {quantity} {t('createPlan.exercises')}
+                {t('createPlan.exercises')} {quantity}
               </Text>
             </View>
             {exercises.exercises.length ? (

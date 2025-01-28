@@ -20,7 +20,7 @@ type TProps = {
   setPreviousScreen?: React.Dispatch<React.SetStateAction<Screens>>;
   title: string;
   description: string;
-  withAddButton?: boolean;
+  withAddButton?: boolean; 
 };
 
 export const Plans = ({

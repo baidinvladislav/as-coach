@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   FlatList,
   Image,
-  Keyboard,
-  Pressable,
   StyleSheet,
   Text,
   TextInput,
@@ -25,6 +23,7 @@ import { NutritionProduct } from '~types';
 
 const FoodSelectionScreen = ({ route }) => {
   const navigation = useNavigation();
+
   const { meal, diet_id } = route?.params;
   const [products, setProducts] = useState<NutritionProduct | []>([]);
   const [filteredProducts, setFilteredProducts] = useState<
@@ -47,57 +46,41 @@ const FoodSelectionScreen = ({ route }) => {
     setFilteredProducts(mealProducts);
     setLoading(false);
   };
+
   const handleTextChange = async (text: string) => {
     setSearchQuery(text);
     if (text === '') {
       setFilteredProducts(products);
-    } else {
-      // const filtered = products.filter(item =>
-      //   item?.name?.toLowerCase().includes(text.toLowerCase()),
-      // );
-      if (
-        // text.length > 3 &&
-        // (text[text.length - 1] === ' ' || text.trim() !== text.trim())
-        text.length > 1
-      ) {
-        handleSearch(text);
-      }
-      // } else {
-      //   setFilteredProducts(filtered);
-      // }
+    } else if (
+      text.length > 0 &&
+      (text[text.length - 1] === ' ' || text !== text.trim())
+    ) {
+      handleSearch(text);
     }
   };
-  // const handleSearch = async text => {
-  //   if (text.trim().length > 0) {
-  //     console.log('Api CAlled');
-  //     // setLoading(true);
-  //     const liveProduct = await searchProduct(text.trim());
-  //     setFilteredProducts(liveProduct);
-  //     // setLoading(false);
-  //   }
-  // };
+
   const handleSearch = async text => {
     if (text.trim().length > 0) {
-      console.log('API Called');
+      console.log('Api CAlled');
       const liveProduct = await searchProduct(text.trim());
-      // Check if any product in liveProduct matches the searchQuery
-      const exactMatch = liveProduct.find(
-        item => item?.name.toLocaleLowerCase === text.trim(),
-      );
-      if (exactMatch) {
-        setFilteredProducts([exactMatch]); // Show only the exact match
-      } else {
-        setFilteredProducts(liveProduct); // Otherwise, show all results
-      }
+      setFilteredProducts(liveProduct);
     }
   };
+
   const handleKeyPress = ({ nativeEvent }: any) => {
     if (nativeEvent.key === 'Enter') {
-      // Dismiss the keyboard and trigger the search
       Keyboard.dismiss();
       handleSearch(searchQuery);
     }
   };
+
+  const handleBlur = () => {
+    setInputFocused(false);
+    if (searchQuery.trim().length > 0) {
+      handleSearch(searchQuery);
+    }
+  };
+
   const handleSelectItem = index => {
     if (selectedIndices.includes(index)) {
       setSelectedIndices(selectedIndices.filter(i => i !== index));
@@ -136,6 +119,7 @@ const FoodSelectionScreen = ({ route }) => {
           })),
         ],
       };
+
       const response = await addProductToDiet(data);
       if (response) {
         navigation.goBack();
@@ -148,6 +132,7 @@ const FoodSelectionScreen = ({ route }) => {
       setLoading(false);
     }
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.searchWrapper}>
@@ -158,15 +143,16 @@ const FoodSelectionScreen = ({ route }) => {
           />
           <TextInput
             ref={inputRef}
+            keyboardType="default"
             placeholder="Search"
             placeholderTextColor="#666"
             value={searchQuery}
             onChangeText={handleTextChange}
-            onSubmitEditing={handleSearch}
+            onSubmitEditing={() => handleSearch(searchQuery)}
             onKeyPress={handleKeyPress}
             style={styles.textInput}
             onFocus={() => setInputFocused(true)}
-            onBlur={() => setInputFocused(false)}
+            onBlur={() => handleBlur()}
           />
           {searchQuery ? (
             <TouchableOpacity
@@ -189,6 +175,7 @@ const FoodSelectionScreen = ({ route }) => {
           </TouchableOpacity>
         ) : null}
       </View>
+
       {filteredProducts.length > 0 ? (
         <FlatList
           data={filteredProducts}
@@ -235,7 +222,7 @@ const FoodSelectionScreen = ({ route }) => {
                   )}
                 </TouchableOpacity>
               </View>
-              {index === filteredProducts.length - 1 &&
+              {index == filteredProducts.length - 1 &&
               searchQuery &&
               filteredProducts.length > 0 ? (
                 <View
@@ -243,6 +230,8 @@ const FoodSelectionScreen = ({ route }) => {
                     paddingVertical: 5,
                     alignItems: 'center',
                     width: '100%',
+                    // borderWidth: 2,
+                    // borderColor: 'red',
                   }}
                 >
                   <Text style={{ color: '#fff', zIndex: 1 }}>
@@ -273,26 +262,22 @@ const FoodSelectionScreen = ({ route }) => {
               >
                 But you can add it yourself
               </Text>
-              <Pressable onPress={() => console.log('This is in progress')}>
+              <Text style={{ color: '#B8FF5F', fontSize: 25, marginTop: '5%' }}>
+                {'+ '}
                 <Text
-                  style={{ color: '#B8FF5F', fontSize: 25, marginTop: '5%' }}
+                  style={{
+                    fontWeight: '700',
+                    fontSize: 18,
+                  }}
                 >
-                  {' '}
-                  {'+ '}
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      fontSize: 18,
-                    }}
-                  >
-                    "{`${searchQuery}`}"
-                  </Text>
+                  "{`${searchQuery}`}"
                 </Text>
-              </Pressable>
+              </Text>
             </View>
           </View>
         )
       )}
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -315,6 +300,7 @@ const FoodSelectionScreen = ({ route }) => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -432,7 +418,8 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#192026',
-    textAlign: 'center',
+    textAlign: 'center',product-selection-screenCopy.tsx
   },
 });
+
 export default FoodSelectionScreen;

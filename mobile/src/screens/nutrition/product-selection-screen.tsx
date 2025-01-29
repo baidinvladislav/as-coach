@@ -47,22 +47,37 @@ const FoodSelectionScreen = ({ route }) => {
     setLoading(false);
   };
 
-  const handleSearch = async (text: string) => {
+  const debounceTimeout = useRef(null);
+
+  const handleTextChange = async (text: string) => {
     setSearchQuery(text);
     if (text === '') {
       setFilteredProducts(products);
+    } else if (
+      text.length > 0 &&
+      (text[text.length - 1] === ' ' || text !== text.trim())
+    ) {
+      handleSearch(text);
     } else {
-      const filtered = products.filter(item =>
-        item?.name?.toLowerCase().includes(text.toLowerCase()),
-      );
-      if (filtered.length <= 0) {
-        setLoading(true);
-        const liveProduct = await searchProduct(text);
-        setFilteredProducts(liveProduct);
-        setLoading(false);
-      } else {
-        setFilteredProducts(filtered);
+      if (debounceTimeout.current) {
+        clearTimeout(debounceTimeout.current);
       }
+      debounceTimeout.current = setTimeout(() => {
+        if (text.trim().length > 0) {
+          handleSearch(text.trim());
+        } else {
+          setFilteredProducts(products);
+        }
+      }, 1000);
+    }
+  };
+
+  const handleSearch = async text => {
+    console.log('api Calling ', text);
+    if (text.trim().length > 0) {
+      console.log('Api CAlled');
+      const liveProduct = await searchProduct(text.trim());
+      setFilteredProducts(liveProduct);
     }
   };
 
@@ -131,7 +146,8 @@ const FoodSelectionScreen = ({ route }) => {
             placeholder="Search"
             placeholderTextColor="#666"
             value={searchQuery}
-            onChangeText={handleSearch}
+            onChangeText={handleTextChange}
+            onSubmitEditing={() => handleSearch(searchQuery)}
             style={styles.textInput}
             onFocus={() => setInputFocused(true)}
             onBlur={() => setInputFocused(false)}
@@ -371,14 +387,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginTop: 20,
     width: '100%',
     paddingVertical: 10,
     position: 'absolute',
     bottom: 0,
     alignSelf: 'center',
-    justifyContent: 'center',
   },
   cancelButton: {
     backgroundColor: '#555',

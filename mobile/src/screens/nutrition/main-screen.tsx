@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getDietDetails } from '@api';
 import { Screens, useNavigation } from '@navigation';
 import { useIsFocused } from '@react-navigation/native';
+import { normHor } from '@theme';
 import { Loader } from '@ui';
 
 import { NutritionData } from '~types';
@@ -321,6 +322,7 @@ const MainScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: normHor(16),
   },
   header: {
     flexDirection: 'row',

@@ -24,6 +24,7 @@ export enum Screens {
   FoodDetailsScreen = 'FoodDetailsScreen',
   FoodSelectionScreen = 'FoodSelectionScreen',
   User = 'User',
+  Plan="Plan"
 }
 
 type Routes = Screens;

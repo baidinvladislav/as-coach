@@ -54,10 +54,16 @@ export const LkScreen = observer(() => {
     <View
       style={{
         flex: 1,
-
+        paddingHorizontal: normHor(16),
         paddingTop: TOP_PADDING + top,
       }}
     >
+      <BackgroundColor />
+      <Background
+        blurRadius={10}
+        source={BackgroundImage}
+        style={{ opacity: 0.3 }}
+      />
       <DateText
         weight={FontWeight.Bold}
         color={colors.black4}

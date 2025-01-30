@@ -5,18 +5,20 @@ import moment from 'moment';
 
 import { getCustomerPlanDetail } from '@api';
 import { ExercisesList } from '@components';
+import { useStore } from '@hooks';
 import { t } from '@i18n';
 import { RoutesProps, useNavigation } from '@navigation';
 import { colors, normVert } from '@theme';
 import { Loader, ModalLayout, RowBorder, Text, ViewWithButtons } from '@ui';
 import { renderNumber } from '@utils';
 
-import { FontSize, FontWeight, TPlanType } from '~types';
+import { FontSize, FontWeight, TPlanType, UserType } from '~types';
 
 export const DetailPlanScreen = ({ route }: RoutesProps) => {
   const [data, setData] = useState<TPlanType>();
   const { goBack } = useNavigation();
-
+  const { user, customer } = useStore();
+  const isCoach = user.me.user_type === UserType.COACH;
   const { id, planId } = route.params as { id: string; planId: string };
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
         <ViewWithButtons
           style={{ justifyContent: 'space-between' }}
           onCancel={goBack}
-          cancelText={t('buttons.ok')}
+          cancelText={t(isCoach ? 'buttons.ok' : 'buttons.fine')}
           isScroll={true}
         >
           <Text
@@ -72,26 +74,28 @@ export const DetailPlanScreen = ({ route }: RoutesProps) => {
             {t('createPlan.title2')}
           </Text>
           <ExercisesList exercises={data.trainings} />
-          <RowBorder
-            title={t('createPlan.restTime')}
-            cells={[
-              {
-                title: t('createPlan.description1'),
-                value: `${data.set_rest} sec`,
-              },
-              {
-                title: t('createPlan.description2'),
-                value: `${data.exercise_rest} sec`,
-              },
-            ]}
-          />
+          {isCoach && (
+            <RowBorder
+              title={t('createPlan.restTime')}
+              cells={[
+                {
+                  title: t('createPlan.description1'),
+                  value: `${data.set_rest} sec`,
+                },
+                {
+                  title: t('createPlan.description2'),
+                  value: `${data.exercise_rest} sec`,
+                },
+              ]}
+            />
+          )}
           <Text
             color={colors.white}
             style={styles.contentTitle}
             fontSize={FontSize.S20}
             weight={FontWeight.Bold}
           >
-            {t('createPlan.title3')}
+            {t(isCoach ? 'createPlan.title3' : 'createPlan.title4')}
           </Text>
           <Text
             color={colors.white}
@@ -116,6 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    paddingTop: 10,
     textTransform: 'uppercase',
     marginBottom: normVert(40),
   },

@@ -77,6 +77,7 @@ const App = () => {
 };
 
 const ATTR = (screen: string) => {
+  console.log(screen);
   switch (screen) {
     case Screens.WelcomeScreen:
       return { edges: ['right', 'left', 'top', 'bottom'] as Edge[] };
@@ -89,7 +90,6 @@ const ATTR = (screen: string) => {
         style: { paddingHorizontal: 0 },
       };
 
-    case Screens.LkScreen:
     case Screens.AddClientScreen:
     case Screens.PlanScreen:
     case Screens.DetailPlanScreen:
@@ -98,6 +98,16 @@ const ATTR = (screen: string) => {
         backgroundBlurRadius: 10,
         backgroundOpacity: 0.3,
         edges: ['right', 'left'] as Edge[],
+        style: { paddingHorizontal: 0 },
+      };
+    case Screens.User:
+    case Screens.LkScreen:
+    case Screens.Plan:
+    case Screens.MainScreen:
+      return {
+        backgroundBlurRadius: 10,
+        backgroundOpacity: 0.3,
+        edges: ['right', 'left', 'top', 'bottom'] as Edge[],
         style: { paddingHorizontal: 0 },
       };
 
